@@ -17,24 +17,23 @@ In this case you execute the script without settings file and any change, becaus
 ##Example for multi database containers (MDC)
 
 In case of MDC there is a SYSTEMDB and a MDC with database name of your choice.
-
-HANA_SID=XSA
-HANA_INSTANCE=00
-HANA_SYSTEM_USER=system
-MDC_DATABASE=ABC
-XSA_USER=xsa_admin
-
+```
+   HANA_SID=XSA
+   HANA_INSTANCE=00
+   HANA_SYSTEM_USER=system
+   MDC_DATABASE=ABC
+   XSA_USER=xsa_admin
+```
 Save this to file xsuaa_settings.cfg
 
 Execute the shell script xsuaa_hdbtrust.sh. 
-
- ./xsuaa_hdbtrust.sh xsuaa_settings.cfg
-
+```
+   ./xsuaa_hdbtrust.sh xsuaa_settings.cfg
+```
 The script creates the trust and executes the test. Typical successful output is:
-
-Result:
+```
 {"SESSION_USER":"SYSTEM","CURRENT_USER":"SYSTEM","SESSION_CONTEXT('XS_APPLICATIONUSER')":"XSA_ADMIN"}
-
+```
 In case you can here an error you can check in uaa.log the error reason or in HANA trace you will find the reason.
 
 ##Example file for HANA Express
@@ -45,10 +44,11 @@ This installation is by default a multi database containers (MDC) installation. 
 https://blogs.sap.com/2016/10/27/create-tenant-database-sap-hana-express-sap-hana-academy/
 
 However if you use XSA and you run your applications into one of these new databases there is no trust between XSUAA and this new database in HANA. You can create this trust with following settings.
-
+```
 HANA_SID=HXE
 HANA_INSTANCE=90
 HANA_XSPATH=/hana/shared/HXE/xs
 HANA_SYSTEM_USER=system
 XSA_USER=xsa_admin
 MDC_DATABASE=TESTDB
+```
