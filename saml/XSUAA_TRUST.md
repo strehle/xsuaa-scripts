@@ -1,18 +1,20 @@
 #HowTo for SAML/JWT trust
 
-You can create trust between XSUAA and HANA database with the bash script ( https://github.com/strehle/xsuaa-scripts/blob/master/saml/xsuaa_hdbtrust.sh ) yourself. You need to following parameters to do this.
+You can create trust between XSUAA and HANA database with the bash script ( https://github.com/strehle/xsuaa-scripts/blob/master/saml/xsuaa_hdbtrust.sh ) yourself. You need to know following parameters:
 
+```
 system user (of logical database)
 system password (of logical database)
 xsa admin user (is optional. if you provide a name this user is enabled for logon with SAML)
+in case of MDC the database name
+```
 
-The bash script can be executed from a remote machine. The machine needs only XS runtime toole, e.g. xs command line tool. The script can be executed with an extra settings file or you can modify the script and uncomment the variables. 
+The bash script can be executed from a remote machine. The machine needs only XS runtime, e.g. xs command line tool. The script can be executed with an extra settings file or you modify the script and uncomment the variables. 
 
 ##Example for local usage with single database instance
 
-Call the script under the <sid>adm user of your XSA installation.
-In this case you execute the script without settings file and any change, because the password is requested in call and all settings are taken from environment. 
-
+Call the script under the OS system admmin user of your XSA installation, e.g. hxeadm if system is HXE.
+In this case you execute the script without a setting file and any change, because the password is requested in call and all settings are taken from environment. 
 
 ##Example for multi database containers (MDC)
 
@@ -34,7 +36,7 @@ The script creates the trust and executes the test. Typical successful output is
 ```
 {"SESSION_USER":"SYSTEM","CURRENT_USER":"SYSTEM","SESSION_CONTEXT('XS_APPLICATIONUSER')":"XSA_ADMIN"}
 ```
-In case you can here an error you can check in uaa.log the error reason or in HANA trace you will find the reason.
+In case of an error you should look into uaa.log for the error reason. Typical error is, that system user password is not correct.
 
 ##Example file for HANA Express
 
